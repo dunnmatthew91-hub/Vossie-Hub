@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vossie Hub - Eduvos Student App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f9f9fb;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 16px 24px;
+      box-shadow: 0 2px 8px rgba(90,86,120,0.06);
+    }
+    .header img {
+      height: 48px;
+      margin-right: 20px;
+    }
+    .header h1 {
+      color: #0E2769;
+      font-size: 2em;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .tabs {
+      display: flex;
+      background: #0E2769;
+      color: #fff;
+      padding: 0;
+    }
+    .tab {
+      padding: 14px 28px;
+      cursor: pointer;
+      font-weight: 500;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .tab.active, .tab:hover {
+      background: #1F3877;
+    }
+    .tab-content {
+      background: #fff;
+      margin: 20px auto;
+      box-shadow: 0 2px 8px rgba(90,86,120,0.04);
+      border-radius: 10px;
+      padding: 36px 32px;
+      max-width: 750px;
+      min-height: 280px;
+    }
+    a.button-link {
+      display: inline-block;
+      margin-top: 20px;
+      background: #25AAE1;
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-size: 1.15em;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    a.button-link:hover {
+      background: #1980AD;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="https://www.eduvos.com/assets/images/logo/logo.svg" alt="Eduvos Logo" />
+    <h1>Vossie Hub</h1>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="openTab('courses')">Courses</button>
+    <button class="tab" onclick="openTab('timetable')">Timetable</button>
+    <button class="tab" onclick="openTab('duedates')">Due Dates</button>
+    <button class="tab" onclick="openTab('teams')">MS Teams</button>
+    <button class="tab" onclick="openTab('outlook')">Outlook</button>
+  </div>
+  <div class="tab-content" id="courses">
+    <h2>Your Courses</h2>
+    <ul>
+      <li>Business Management 101</li>
+      <li>Marketing Principles</li>
+      <li>Accounting Fundamentals</li>
+      <li>Information Systems</li>
+    </ul>
+  </div>
+  <div class="tab-content" id="timetable" style="display:none;">
+    <h2>Class Timetable</h2>
+    <table>
+      <tr><td>Monday</td><td>10:00 - 12:00</td><td>Business Management 101 (Room A1)</td></tr>
+      <tr><td>Tuesday</td><td>13:00 - 15:00</td><td>Marketing Principles (Room B2)</td></tr>
+      <tr><td>Wednesday</td><td>08:00 - 10:00</td><td>Accounting Fundamentals (Room C3)</td></tr>
+      <tr><td>Friday</td><td>11:00 - 13:00</td><td>Information Systems (Online)</td></tr>
+    </table>
+  </div>
+  <div class="tab-content" id="duedates" style="display:none;">
+    <h2>Upcoming Due Dates</h2>
+    <ul>
+      <li>Business Management Assignment 1 – <strong>2026-03-10</strong></li>
+      <li>Marketing Principles Quiz – <strong>2026-03-15</strong></li>
+      <li>Accounting Fundamentals Test – <strong>2026-03-22</strong></li>
+    </ul>
+  </div>
+  <div class="tab-content" id="teams" style="display:none;">
+    <h2>MS Teams</h2>
+    <p>Access your classes and chats in Microsoft Teams:</p>
+    <a class="button-link" href="https://teams.microsoft.com" target="_blank" rel="noopener">Open MS Teams</a>
+  </div>
+  <div class="tab-content" id="outlook" style="display:none;">
+    <h2>Outlook</h2>
+    <p>Check your student emails via Microsoft Outlook:</p>
+    <a class="button-link" href="https://outlook.office.com" target="_blank" rel="noopener">Open Outlook</a>
+  </div>
+  <script>
+    function openTab(tabId) {
+      // Hide all tab-contents
+      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+      // Remove 'active' from all tabs
+      document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+      // Show selected
+      document.getElementById(tabId).style.display = 'block';
+      event.currentTarget.classList.add('active');
+    }
+    // Make tab keyboard-accessible
+    document.querySelectorAll('.tab').forEach((tab, i, arr) => {
+      tab.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') arr[(i+1)%arr.length].focus();
+        if (e.key === 'ArrowLeft') arr[(i-1+arr.length)%arr.length].focus();
+      });
+    });
+  </script>
+</body>
+</html>

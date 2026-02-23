@@ -2,224 +2,251 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vossie Hub - Eduvos Student App</title>
+  <title>Vossie Hub - Courses Tab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f9f9fb;
-      margin: 0;
-      padding: 0;
-    }
-    .header {
+    .courses-header {
       display: flex;
       align-items: center;
-      background: #fff;
-      padding: 16px 24px;
-      box-shadow: 0 2px 8px rgba(90,86,120,0.06);
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
-    .header h1 {
-      color: #0E2769;
-      font-size: 2em;
+    .courses-header h2 {
       margin: 0;
-      letter-spacing: 1px;
     }
-    .tabs {
+    .search-filter {
       display: flex;
-      background: #0E2769;
-      color: #fff;
-      padding: 0;
-      flex-wrap: wrap;
+      gap: 10px;
     }
-    .tab {
-      padding: 14px 28px;
-      cursor: pointer;
-      font-weight: 500;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: inherit;
-      transition: background 0.15s;
+    .search-filter input {
+      padding: 7px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-    .tab.active, .tab:hover {
-      background: #1F3877;
+    .search-filter select {
+      padding: 7px 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-    .tab-content {
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .course-card {
       background: #fff;
-      margin: 20px auto;
-      box-shadow: 0 2px 8px rgba(90,86,120,0.04);
       border-radius: 10px;
-      padding: 36px 32px;
-      max-width: 750px;
-      min-height: 240px;
-    }
-    .courses-list button {
-      display: block;
-      margin: 10px 0;
-      padding: 14px 18px;
-      background: #0E2769;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
+      padding: 20px;
+      box-shadow: 0 1px 6px rgba(90,86,120,0.08);
       cursor: pointer;
-      font-size: 1em;
-      font-weight: 500;
-      transition: background 0.15s;
+      transition: box-shadow 0.15s;
+      border: 1px solid #eee;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 200px;
     }
-    .courses-list button:hover {
+    .course-card:hover {
+      box-shadow: 0 4px 12px rgba(90,86,120,0.13);
+      border-color: #25AAE1;
+    }
+    .course-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+    .course-title {
+      font-weight: bold;
+      color: #434571;
+      margin-bottom: 8px;
+      font-size: 1.1em;
+    }
+    .course-status-bar {
+      height: 7px;
+      background: #f4f4f8;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 13px 0 0 0;
+      width: 100%;
+    }
+    .status-fill {
       background: #25AAE1;
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.3s;
+    }
+    .course-status {
+      font-size: 0.95em;
+      color: #727187;
+      margin-top: 7px;
+      margin-bottom: 0;
     }
     .subject-details {
-      margin-top: 24px;
+      margin-top: 32px;
+      padding: 18px;
+      background: #f8faff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(90,86,120,0.08);
+      max-width: 550px;
     }
-    a.button-link {
+    .back-btn {
       display: inline-block;
-      margin-top: 20px;
-      background: #25AAE1;
-      color: #fff;
-      padding: 14px 32px;
+      margin: 20px 0 0 0;
+      background: #fff;
+      color: #0E2769;
+      border: 2px solid #0E2769;
+      padding: 10px 42px;
       border-radius: 6px;
-      font-size: 1.15em;
-      text-decoration: none;
       font-weight: 600;
-      transition: background 0.15s;
-    }
-    a.button-link:hover {
-      background: #1980AD;
-    }
-    @media (max-width: 600px) {
-      .tab-content {
-        padding: 18px 4px;
-      }
-      .header h1 {
-        font-size: 1.2em;
-      }
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Vossie Hub</h1>
-  </div>
-  <div class="tabs" id="tabs">
-    <button class="tab active" onclick="openTab('home')">Home</button>
-    <button class="tab" onclick="openTab('courses')">Courses</button>
-    <button class="tab" onclick="openTab('teams')">MS Teams</button>
-    <button class="tab" onclick="openTab('outlook')">Outlook</button>
-  </div>
-  <div class="tab-content" id="home">
-    <h2>Hey Matthew 👋</h2>
-    <p>
-      Welcome to <strong>Vossie Hub</strong>, your all-in-one student platform at Eduvos.<br>
-      View your courses, subject timetables, assessment due dates, homework and access MS Teams and Outlook—all in one place!
-    </p>
-  </div>
-  <div class="tab-content" id="courses" style="display:none;">
-    <h2>Your Courses</h2>
-    <div class="courses-list">
-      <button onclick="showSubject('bm')">Business Management 101</button>
-      <button onclick="showSubject('marketing')">Marketing Principles</button>
-      <button onclick="showSubject('accounting')">Accounting Fundamentals</button>
+  <div class="tab-content" id="courses">
+    <div class="courses-header">
+      <h2>My Courses</h2>
+      <div class="search-filter">
+        <input id="courses-search" type="text" placeholder="Search" oninput="filterCourses()">
+        <select id="courses-filter" onchange="filterCourses()">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="incomplete">Incomplete</option>
+        </select>
+      </div>
+    </div>
+    <div class="course-grid" id="course-grid">
+      <!-- Course cards inserted by JS -->
     </div>
     <div class="subject-details" id="subject-details" style="display:none;">
-      <!-- Dynamic subject info appears here -->
+      <!-- Subject info appears here -->
     </div>
   </div>
-  <div class="tab-content" id="teams" style="display:none;">
-    <h2>MS Teams</h2>
-    <p>Access your classes and chats in Microsoft Teams:</p>
-    <a class="button-link" href="https://teams.microsoft.com" target="_blank" rel="noopener">Open MS Teams</a>
-  </div>
-  <div class="tab-content" id="outlook" style="display:none;">
-    <h2>Outlook</h2>
-    <p>Check your student emails via Microsoft Outlook:</p>
-    <a class="button-link" href="https://outlook.office.com" target="_blank" rel="noopener">Open Outlook</a>
-  </div>
   <script>
-    // Tab switching
-    function openTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
-      document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(tabId).style.display = 'block';
-      event.currentTarget.classList.add('active');
-      // Hide subject details when changing tab
-      if (tabId !== 'courses') document.getElementById('subject-details').style.display = 'none';
-    }
-
-    // Subject details data
-    const subjects = {
-      bm: {
-        name: "Business Management 101",
-        timetable: [
-          { day: "Monday", time: "10:00 - 12:00", location: "Room A1" },
-          { day: "Thursday", time: "14:00 - 15:30", location: "Room B3" }
-        ],
+    // Demo course data: you can expand as needed
+    const courses = [
+      {
+        key: 'bm',
+        icon: 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png', // sample icon
+        title: 'COBMA-11 (2026)',
+        subtitle: 'Business Management 101',
+        complete: 38,
+        status: 'In progress',
         assessments: [
           { name: "Case Study", date: "2026-03-10" },
           { name: "Group Presentation", date: "2026-03-24" }
+        ],
+        timetable: [
+          { day: "Monday", time: "10:00 - 12:00", location: "Room A1" },
+          { day: "Thursday", time: "14:00 - 15:30", location: "Room B3" }
         ],
         homework: [
           "Read chapters 1-3 on management styles.",
           "Prepare group slides on leadership theories."
         ]
       },
-      marketing: {
-        name: "Marketing Principles",
+      {
+        key: 'marketing',
+        icon: 'https://cdn-icons-png.flaticon.com/512/1087/1087922.png', // sample icon
+        title: 'COBMA-11 Assessments (2026)',
+        subtitle: 'Marketing Principles',
+        complete: 100,
+        status: 'Completed',
+        assessments: [
+          { name: "Quiz 1", date: "2026-03-15" },
+          { name: "Brand Analysis", date: "2026-03-28" }
+        ],
         timetable: [
           { day: "Tuesday", time: "13:00 - 15:00", location: "Room B2" },
           { day: "Friday", time: "09:00 - 10:30", location: "Room D1" }
         ],
-        assessments: [
-          { name: "Quiz 1", date: "2026-03-15" },
-          { name: "Assignment: Brand Analysis", date: "2026-03-28" }
-        ],
         homework: [
-          "Research 3 South African brands and their marketing strategies.",
+          "Research 3 brands and analyze their campaigns.",
           "Complete quiz revision questions 5-10."
         ]
       },
-      accounting: {
-        name: "Accounting Fundamentals",
-        timetable: [
-          { day: "Wednesday", time: "08:00 - 10:00", location: "Room C3" }
-        ],
+      {
+        key: 'coe',
+        icon: 'https://cdn-icons-png.flaticon.com/512/1404/1404945.png', // sample icon
+        title: 'COE and Policies Escape Room',
+        subtitle: 'COE and Policies Escape Room',
+        complete: 0,
+        status: 'Not started',
         assessments: [
-          { name: "Test 1", date: "2026-03-22" },
-          { name: "Homework Exercise Submission", date: "2026-03-25" }
+          { name: "Escape Room Progress", date: "2026-03-30" }
+        ],
+        timetable: [
+          { day: "Online", time: "Self-paced", location: "Virtual" }
         ],
         homework: [
-          "Practice ledger entries from tutorial sheet.",
-          "Solve balance sheet problems on pg 45."
+          "Read COE chapters 1-2.",
+          "Practice escape room puzzles."
         ]
       }
+    ];
+
+    // Render courses grid
+    function renderCourses() {
+      const grid = document.getElementById('course-grid');
+      grid.innerHTML = '';
+      // Filtering
+      const search = document.getElementById('courses-search').value.toLowerCase();
+      const filter = document.getElementById('courses-filter').value;
+
+      courses.forEach(course => {
+        if (
+          (search === '' || course.title.toLowerCase().includes(search) || course.subtitle.toLowerCase().includes(search)) &&
+          (filter === 'all' ||
+           (filter === 'completed' && course.complete === 100) ||
+           (filter === 'incomplete' && course.complete < 100))
+        ) {
+          let card = document.createElement('div');
+          card.className = 'course-card';
+          card.onclick = () => showSubjectDetails(course.key);
+          card.innerHTML = `
+            <img class="course-icon" src="${course.icon}" alt="Course Icon" />
+            <div class="course-title">${course.subtitle}</div>
+            <div>${course.title}</div>
+            <div class="course-status-bar">
+              <div class="status-fill" style="width:${course.complete}%"></div>
+            </div>
+            <div class="course-status">${course.status} (${course.complete}% complete)</div>
+          `;
+          grid.appendChild(card);
+        }
+      });
     }
 
-    // Show subject details (from Courses tab)
-    function showSubject(subj) {
-      const s = subjects[subj];
-      let html = `<h3>${s.name}</h3>
-      <b>Timetable:</b>
-      <ul>${s.timetable.map(t => `<li>${t.day}: ${t.time} (${t.location})</li>`).join('')}</ul>
-      <b>Assessment Due Dates:</b>
-      <ul>${s.assessments.map(a => `<li>${a.name} – <strong>${a.date}</strong></li>`).join('')}</ul>
-      <b>Homework:</b>
-      <ul>${s.homework.map(hw => `<li>${hw}</li>`).join('')}</ul>
-      <button onclick="hideSubject()" style="margin-top:18px;background:#fff;color:#0E2769;border:2px solid #0E2769;font-weight:600;">Back to Courses</button>
-      `;
+    // Show subject details
+    function showSubjectDetails(key) {
+      const c = courses.find(course => course.key === key);
+      let html = `<h3>${c.subtitle}</h3>
+        <b>Timetable:</b>
+        <ul>${c.timetable.map(t => `<li>${t.day}: ${t.time} (${t.location})</li>`).join('')}</ul>
+        <b>Assessment Due Dates:</b>
+        <ul>${c.assessments.map(a => `<li>${a.name} – <strong>${a.date}</strong></li>`).join('')}</ul>
+        <b>Homework:</b>
+        <ul>${c.homework.map(hw => `<li>${hw}</li>`).join('')}</ul>
+        <button class="back-btn" onclick="hideSubjectDetails()">Back to Courses</button>`;
       document.getElementById('subject-details').innerHTML = html;
       document.getElementById('subject-details').style.display = 'block';
+      document.getElementById('course-grid').style.display = 'none';
+      document.querySelector('.courses-header').style.display = 'none';
     }
-    function hideSubject() {
+    function hideSubjectDetails() {
       document.getElementById('subject-details').style.display = 'none';
+      document.getElementById('course-grid').style.display = 'grid';
+      document.querySelector('.courses-header').style.display = 'flex';
     }
 
-    // Keyboard nav for tabs (optional, for accessibility)
-    document.querySelectorAll('.tab').forEach((tab, i, arr) => {
-      tab.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight') arr[(i+1)%arr.length].focus();
-        if (e.key === 'ArrowLeft') arr[(i-1+arr.length)%arr.length].focus();
-      });
-    });
+    function filterCourses() {
+      renderCourses();
+      hideSubjectDetails();
+    }
+
+    // Initial render
+    renderCourses();
   </script>
 </body>
 </html>

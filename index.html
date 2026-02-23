@@ -33,6 +33,7 @@
       background: #0E2769;
       color: #fff;
       padding: 0;
+      flex-wrap: wrap;
     }
     .tab {
       padding: 14px 28px;
@@ -79,23 +80,42 @@
     <h1>Vossie Hub</h1>
   </div>
   <div class="tabs" id="tabs">
-    <button class="tab active" onclick="openTab('courses')">Courses</button>
+    <button class="tab active" onclick="openTab('home')">Home</button>
+    <button class="tab" onclick="openTab('bm101')">Business Management 101</button>
+    <button class="tab" onclick="openTab('marketing')">Marketing Principles</button>
     <button class="tab" onclick="openTab('timetable')">Timetable</button>
     <button class="tab" onclick="openTab('duedates')">Due Dates</button>
     <button class="tab" onclick="openTab('teams')">MS Teams</button>
     <button class="tab" onclick="openTab('outlook')">Outlook</button>
   </div>
-  <div class="tab-content" id="courses">
-    <h2>Your Courses</h2>
+  <div class="tab-content" id="home">
+    <h2>Hey Matthew 👋</h2>
+    <p>
+      Welcome to <strong>Vossie Hub</strong>, your all-in-one student platform at Eduvos.<br>
+      Here you can see your courses, check your timetable, keep track of assignment due dates, 
+      and quickly access important tools like MS Teams and Outlook, all in one convenient place!
+    </p>
+  </div>
+  <div class="tab-content" id="bm101" style="display:none;">
+    <h2>Business Management 101</h2>
     <ul>
-      <li>Business Management 101</li>
-      <li>Marketing Principles</li>
-      <li>Accounting Fundamentals</li>
-      <li>Information Systems</li>
+      <li>Lecturer: Prof. A. Smith</li>
+      <li>Class Time: Monday 10:00 - 12:00 (Room A1)</li>
+      <li>Upcoming Assignment: Case Study – <strong>2026-03-10</strong></li>
     </ul>
+    <p>Access lecture notes and resources via <a href="#" style="color:#0E2769; text-decoration:underline;">Vossie Portal</a>.</p>
+  </div>
+  <div class="tab-content" id="marketing" style="display:none;">
+    <h2>Marketing Principles</h2>
+    <ul>
+      <li>Lecturer: Ms. J. Daniels</li>
+      <li>Class Time: Tuesday 13:00 - 15:00 (Room B2)</li>
+      <li>Upcoming Quiz: Principles Quiz – <strong>2026-03-15</strong></li>
+    </ul>
+    <p>Resources are shared on MS Teams. Join class discussions there!</p>
   </div>
   <div class="tab-content" id="timetable" style="display:none;">
-    <h2>Class Timetable</h2>
+    <h2>Your Class Timetable</h2>
     <table>
       <tr><td>Monday</td><td>10:00 - 12:00</td><td>Business Management 101 (Room A1)</td></tr>
       <tr><td>Tuesday</td><td>13:00 - 15:00</td><td>Marketing Principles (Room B2)</td></tr>
@@ -106,7 +126,7 @@
   <div class="tab-content" id="duedates" style="display:none;">
     <h2>Upcoming Due Dates</h2>
     <ul>
-      <li>Business Management Assignment 1 – <strong>2026-03-10</strong></li>
+      <li>Business Management Case Study – <strong>2026-03-10</strong></li>
       <li>Marketing Principles Quiz – <strong>2026-03-15</strong></li>
       <li>Accounting Fundamentals Test – <strong>2026-03-22</strong></li>
     </ul>

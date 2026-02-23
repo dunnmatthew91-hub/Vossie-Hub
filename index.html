@@ -18,6 +18,10 @@
       padding: 16px 24px;
       box-shadow: 0 2px 8px rgba(90,86,120,0.06);
     }
+    .header img {
+      height: 48px;
+      margin-right: 20px;
+    }
     .header h1 {
       color: #0E2769;
       font-size: 2em;
@@ -51,26 +55,7 @@
       border-radius: 10px;
       padding: 36px 32px;
       max-width: 750px;
-      min-height: 240px;
-    }
-    .courses-list button {
-      display: block;
-      margin: 10px 0;
-      padding: 14px 18px;
-      background: #0E2769;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: 500;
-      transition: background 0.15s;
-    }
-    .courses-list button:hover {
-      background: #25AAE1;
-    }
-    .subject-details {
-      margin-top: 24px;
+      min-height: 280px;
     }
     a.button-link {
       display: inline-block;
@@ -87,23 +72,19 @@
     a.button-link:hover {
       background: #1980AD;
     }
-    @media (max-width: 600px) {
-      .tab-content {
-        padding: 18px 4px;
-      }
-      .header h1 {
-        font-size: 1.2em;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="header">
+    <img src="https://share.google/nwF5URHCGUATfvfIa" alt="Eduvos Logo" />
     <h1>Vossie Hub</h1>
   </div>
   <div class="tabs" id="tabs">
     <button class="tab active" onclick="openTab('home')">Home</button>
-    <button class="tab" onclick="openTab('courses')">Courses</button>
+    <button class="tab" onclick="openTab('bm101')">Business Management 101</button>
+    <button class="tab" onclick="openTab('marketing')">Marketing Principles</button>
+    <button class="tab" onclick="openTab('timetable')">Timetable</button>
+    <button class="tab" onclick="openTab('duedates')">Due Dates</button>
     <button class="tab" onclick="openTab('teams')">MS Teams</button>
     <button class="tab" onclick="openTab('outlook')">Outlook</button>
   </div>
@@ -111,19 +92,44 @@
     <h2>Hey Matthew 👋</h2>
     <p>
       Welcome to <strong>Vossie Hub</strong>, your all-in-one student platform at Eduvos.<br>
-      View your courses, subject timetables, assessment due dates, homework and access MS Teams and Outlook—all in one place!
+      Here you can see your courses, check your timetable, keep track of assignment due dates, 
+      and quickly access important tools like MS Teams and Outlook, all in one convenient place!
     </p>
   </div>
-  <div class="tab-content" id="courses" style="display:none;">
-    <h2>Your Courses</h2>
-    <div class="courses-list">
-      <button onclick="showSubject('bm')">Business Management 101</button>
-      <button onclick="showSubject('marketing')">Marketing Principles</button>
-      <button onclick="showSubject('accounting')">Accounting Fundamentals</button>
-    </div>
-    <div class="subject-details" id="subject-details" style="display:none;">
-      <!-- Dynamic subject info appears here -->
-    </div>
+  <div class="tab-content" id="bm101" style="display:none;">
+    <h2>Business Management 101</h2>
+    <ul>
+      <li>Lecturer: Prof. A. Smith</li>
+      <li>Class Time: Monday 10:00 - 12:00 (Room A1)</li>
+      <li>Upcoming Assignment: Case Study – <strong>2026-03-10</strong></li>
+    </ul>
+    <p>Access lecture notes and resources via <a href="#" style="color:#0E2769; text-decoration:underline;">Vossie Portal</a>.</p>
+  </div>
+  <div class="tab-content" id="marketing" style="display:none;">
+    <h2>Marketing Principles</h2>
+    <ul>
+      <li>Lecturer: Ms. J. Daniels</li>
+      <li>Class Time: Tuesday 13:00 - 15:00 (Room B2)</li>
+      <li>Upcoming Quiz: Principles Quiz – <strong>2026-03-15</strong></li>
+    </ul>
+    <p>Resources are shared on MS Teams. Join class discussions there!</p>
+  </div>
+  <div class="tab-content" id="timetable" style="display:none;">
+    <h2>Your Class Timetable</h2>
+    <table>
+      <tr><td>Monday</td><td>10:00 - 12:00</td><td>Business Management 101 (Room A1)</td></tr>
+      <tr><td>Tuesday</td><td>13:00 - 15:00</td><td>Marketing Principles (Room B2)</td></tr>
+      <tr><td>Wednesday</td><td>08:00 - 10:00</td><td>Accounting Fundamentals (Room C3)</td></tr>
+      <tr><td>Friday</td><td>11:00 - 13:00</td><td>Information Systems (Online)</td></tr>
+    </table>
+  </div>
+  <div class="tab-content" id="duedates" style="display:none;">
+    <h2>Upcoming Due Dates</h2>
+    <ul>
+      <li>Business Management Case Study – <strong>2026-03-10</strong></li>
+      <li>Marketing Principles Quiz – <strong>2026-03-15</strong></li>
+      <li>Accounting Fundamentals Test – <strong>2026-03-22</strong></li>
+    </ul>
   </div>
   <div class="tab-content" id="teams" style="display:none;">
     <h2>MS Teams</h2>
@@ -136,84 +142,16 @@
     <a class="button-link" href="https://outlook.office.com" target="_blank" rel="noopener">Open Outlook</a>
   </div>
   <script>
-    // Tab switching
     function openTab(tabId) {
+      // Hide all tab-contents
       document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+      // Remove 'active' from all tabs
       document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+      // Show selected
       document.getElementById(tabId).style.display = 'block';
       event.currentTarget.classList.add('active');
-      // Hide subject details when changing tab
-      if (tabId !== 'courses') document.getElementById('subject-details').style.display = 'none';
     }
-
-    // Subject details data
-    const subjects = {
-      bm: {
-        name: "Business Management 101",
-        timetable: [
-          { day: "Monday", time: "10:00 - 12:00", location: "Room A1" },
-          { day: "Thursday", time: "14:00 - 15:30", location: "Room B3" }
-        ],
-        assessments: [
-          { name: "Case Study", date: "2026-03-10" },
-          { name: "Group Presentation", date: "2026-03-24" }
-        ],
-        homework: [
-          "Read chapters 1-3 on management styles.",
-          "Prepare group slides on leadership theories."
-        ]
-      },
-      marketing: {
-        name: "Marketing Principles",
-        timetable: [
-          { day: "Tuesday", time: "13:00 - 15:00", location: "Room B2" },
-          { day: "Friday", time: "09:00 - 10:30", location: "Room D1" }
-        ],
-        assessments: [
-          { name: "Quiz 1", date: "2026-03-15" },
-          { name: "Assignment: Brand Analysis", date: "2026-03-28" }
-        ],
-        homework: [
-          "Research 3 South African brands and their marketing strategies.",
-          "Complete quiz revision questions 5-10."
-        ]
-      },
-      accounting: {
-        name: "Accounting Fundamentals",
-        timetable: [
-          { day: "Wednesday", time: "08:00 - 10:00", location: "Room C3" }
-        ],
-        assessments: [
-          { name: "Test 1", date: "2026-03-22" },
-          { name: "Homework Exercise Submission", date: "2026-03-25" }
-        ],
-        homework: [
-          "Practice ledger entries from tutorial sheet.",
-          "Solve balance sheet problems on pg 45."
-        ]
-      }
-    }
-
-    // Show subject details (from Courses tab)
-    function showSubject(subj) {
-      const s = subjects[subj];
-      let html = `<h3>${s.name}</h3>
-      <b>Timetable:</b>
-      <ul>${s.timetable.map(t => `<li>${t.day}: ${t.time} (${t.location})</li>`).join('')}</ul>
-      <b>Assessment Due Dates:</b>
-      <ul>${s.assessments.map(a => `<li>${a.name} – <strong>${a.date}</strong></li>`).join('')}</ul>
-      <b>Homework:</b>
-      <ul>${s.homework.map(hw => `<li>${hw}</li>`).join('')}</ul>
-      <button onclick="hideSubject()" style="margin-top:18px;background:#fff;color:#0E2769;border:2px solid #0E2769;font-weight:600;">Back to Courses</button>
-      `;
-      document.getElementById('subject-details').innerHTML = html;
-      document.getElementById('subject-details').style.display = 'block';
-    }
-    function hideSubject() {
-      document.getElementById('subject-details').style.display = 'none';
-    }
-
-    // Keyboard nav for tabs (optional, for accessibility)
+    // Make tab keyboard-accessible
     document.querySelectorAll('.tab').forEach((tab, i, arr) => {
       tab.addEventListener('keydown', e => {
         if (e.key === 'ArrowRight') arr[(i+1)%arr.length].focus();
@@ -223,116 +161,3 @@
   </script>
 </body>
 </html>
-<div class="tab-content" id="courses" style="display:none;">
-  <h2>Your Courses</h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:24px;">
-    <!-- Business Management 101 -->
-    <div style="background:#fff;border-radius:10px;padding:18px;box-shadow:0 1px 8px rgba(90,86,120,0.14);">
-      <h3 style="color:#0E2769;">Business Management 101</h3>
-      <div style="display:grid;gap:12px">
-        <!-- Assignment Due Dates -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Assignment Due Dates</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Case Study – <strong>2026-03-10</strong></li>
-            <li>Group Presentation – <strong>2026-03-24</strong></li>
-          </ul>
-        </div>
-        <!-- Test Due Dates -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Test Due Dates</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Midterm Test – <strong>2026-04-02</strong></li>
-          </ul>
-        </div>
-        <!-- Lessons -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Lessons</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Management Styles (Week 1)</li>
-            <li>Leadership Theories (Week 2)</li>
-          </ul>
-        </div>
-        <!-- Timetable -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Timetable</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Monday 10:00 - 12:00 (Room A1)</li>
-            <li>Thursday 14:00 - 15:30 (Room B3)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- Marketing Principles -->
-    <div style="background:#fff;border-radius:10px;padding:18px;box-shadow:0 1px 8px rgba(90,86,120,0.14);">
-      <h3 style="color:#0E2769;">Marketing Principles</h3>
-      <div style="display:grid;gap:12px">
-        <!-- Assignment Due Dates -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Assignment Due Dates</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Brand Analysis – <strong>2026-03-28</strong></li>
-          </ul>
-        </div>
-        <!-- Test Due Dates -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Test Due Dates</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Quiz 1 – <strong>2026-03-15</strong></li>
-          </ul>
-        </div>
-        <!-- Lessons -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Lessons</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Brand Marketing (Week 1)</li>
-            <li>Advertising Strategies (Week 2)</li>
-          </ul>
-        </div>
-        <!-- Timetable -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Timetable</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Tuesday 13:00 - 15:00 (Room B2)</li>
-            <li>Friday 09:00 - 10:30 (Room D1)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- Accounting Fundamentals -->
-    <div style="background:#fff;border-radius:10px;padding:18px;box-shadow:0 1px 8px rgba(90,86,120,0.14);">
-      <h3 style="color:#0E2769;">Accounting Fundamentals</h3>
-      <div style="display:grid;gap:12px">
-        <!-- Assignment Due Dates -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Assignment Due Dates</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Homework Exercise Submission – <strong>2026-03-25</strong></li>
-          </ul>
-        </div>
-        <!-- Test Due Dates -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Test Due Dates</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Test 1 – <strong>2026-03-22</strong></li>
-          </ul>
-        </div>
-        <!-- Lessons -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Lessons</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Ledger Entries (Week 1)</li>
-            <li>Balance Sheets (Week 2)</li>
-          </ul>
-        </div>
-        <!-- Timetable -->
-        <div style="background:#f8f8fb;padding:10px;border-radius:7px;">
-          <b>Timetable</b>
-          <ul style="margin:7px 0 0 15px">
-            <li>Wednesday 08:00 - 10:00 (Room C3)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
